@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .forms import CustomUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -12,26 +13,35 @@ def index(request):
 def home(request):
     return render(request, 'home.html')
 
-def signin(request):
+def signup(request):
     if request.method == 'GET':
-        return render(request, 'registration/signin.html', {"form": UserCreationForm()})
+        return render(request, 'registration/signup.html', {"form": CustomUserCreationForm()})
     else:
-        if request.POST["password1"] == request.POST["password2"]:
-            try:
-                user = User.objects.create_user(username=request.POST["username"], password=request.POST["password1"])
-                user.save()
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+                user = form.save()
                 login(request, user)
-                return redirect("home")
-            except:
-                return render(request, 'registration/signin.html', {
-                    "form": UserCreationForm(),
-                    "msg": "Nombre de usuario ya existente"
-                })
-        return render(request, 'registration/signin.html', {
-            "form" : UserCreationForm(),
-            "msg" : "Las contraseñas no coinciden"
+                return redirect("home")       
+        return render(request, 'registration/signup.html', {
+            "form" : CustomUserCreationForm(),
+            "msg" : "error: compruebe que las contraseñas no coincidan o que el nombre de usuario no este en uso"
         })
-    
+
+def signin(request):
+     if request.method == 'GET':
+        return render(request, 'registration/login.html', {"form": AuthenticationForm()})
+     else:
+        user = authenticate(request, username=request.POST["username"], password=request.POST["password"])
+
+        if user is None:
+            return render(request, 'registration/login.html', {
+                "form": AuthenticationForm(),
+                "msg": "el usuario o la contraseña estan incorrectos"
+            })
+        else:
+            login(request, user)
+            return redirect("home")
+     
 @login_required 
 def signout(request):
     logout(request)
