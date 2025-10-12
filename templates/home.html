@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+bienvenido {{user.username}}
+<a href="{% url "logout" %}">Salir</a>
+{% else %}
+bienvenido invitado
+{% endif %}
+
