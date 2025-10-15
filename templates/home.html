@@ -9,6 +9,8 @@ bienvenido {{user.username}}
     </li>
     {% endfor %}
 </ul>
+<a href="{% url "perfil" %}">configurar alergias</a>
+
 {% else %}
 bienvenido invitado
 <h1>Alergias disponibles:</h1>

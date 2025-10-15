@@ -1,0 +1,10 @@
+{% if user.is_authenticated %}
+<h1>{{user.username}}</h1>
+<form action="">
+    {% for allergy in list %}
+    <label><input type="checkbox">{{allergy.name}}</label>
+    {% endfor %}
+</form>
+{% else %}
+<h1>chao</h1>
+{% endif %}

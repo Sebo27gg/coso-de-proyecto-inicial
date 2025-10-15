@@ -50,7 +50,11 @@ def signin(request):
         else:
             login(request, user)
             return redirect("home")
-     
+        
+def perfil(request):
+    list = Allergy.objects.all()
+    return render(request, 'perfil.html', {"list":list})
+   
 @login_required 
 def signout(request):
     logout(request)
