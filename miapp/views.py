@@ -52,8 +52,11 @@ def signin(request):
             return redirect("home")
         
 def perfil(request):
-    list = Allergy.objects.all()
-    return render(request, 'perfil.html', {"list":list})
+    if request.method == 'GET':
+        list = Allergy.objects.all()
+        return render(request, 'perfil.html', {"list":list})
+    else:
+        return redirect("home")
    
 @login_required 
 def signout(request):
