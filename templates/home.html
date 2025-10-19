@@ -1,7 +1,21 @@
 {% if user.is_authenticated %}
 bienvenido {{user.username}}
 <a href="{% url "logout" %}">Salir</a>
+<h1>Tus alergias:</h1>
+<ul>
+    {% for allergy in list %}
+    <li>
+        {{ allergy.name }}
+    </li>
+    {% endfor %}
+</ul>
 {% else %}
 bienvenido invitado
+<h1>Alergias disponibles:</h1>
+<form action="">
+    {% for allergy in list %}
+    <label><input type="checkbox">{{allergy.name}}</label>
+    {% endfor %}
+</form>
 {% endif %}
 

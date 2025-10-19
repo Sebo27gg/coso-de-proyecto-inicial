@@ -1,11 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
+class allergy(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ManyToManyField(User, blank=True)
 
-class Allergy(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField()
-    users = models.ManyToManyField(User, blank=True)
-    def __str__(self):
-        return self.name
+class ingredient(models.Model):
+    name = models.CharField(max_length=100)
+    allergies = models.ManyToManyField(allergy, blank=True)
+
+class product(models.Model):
+    name = models.CharField(max_length=100)
+    ingredients = models.ManyToManyField(ingredient, blank=True)
+

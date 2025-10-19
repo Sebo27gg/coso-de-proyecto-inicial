@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Allergy
+from .models import allergy
 
 # Register your models here.
 
-admin.site.register(Allergy)
+admin.site.register(allergy) 
