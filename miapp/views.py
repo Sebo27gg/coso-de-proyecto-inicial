@@ -18,7 +18,7 @@ def home(request):
         user = User.objects.get(id=request.user.id)
         list = user.allergy_set.all()
     else:
-        list = Allergy.objects.all()
+        list = allergy.objects.all()
     return render(request, 'home.html', {"list": list})
 
 def signup(request):
@@ -53,7 +53,7 @@ def signin(request):
         
 def perfil(request):
     if request.method == 'GET':
-        list = Allergy.objects.all()
+        list = allergy.objects.all()
         return render(request, 'perfil.html', {"list":list})
     else:
         return redirect("home")
