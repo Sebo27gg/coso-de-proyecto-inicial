@@ -4,14 +4,22 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import Allergy
 
 # Create your views here.
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect("home")
     return render(request, 'index.html')
 
 def home(request):
-    return render(request, 'home.html')
+    if request.user.is_authenticated:
+        user = User.objects.get(id=request.user.id)
+        list = user.allergy_set.all()
+    else:
+        list = Allergy.objects.all()
+    return render(request, 'home.html', {"list": list})
 
 def signup(request):
     if request.method == 'GET':
@@ -21,11 +29,12 @@ def signup(request):
         if form.is_valid():
                 user = form.save()
                 login(request, user)
-                return redirect("home")       
-        return render(request, 'registration/signup.html', {
-            "form" : CustomUserCreationForm(),
-            "msg" : "error: compruebe que las contraseñas no coincidan o que el nombre de usuario no este en uso"
-        })
+                return redirect("home")   
+        else:
+            return render(request, 'registration/signup.html', {
+                "form" : CustomUserCreationForm(),
+                "msg" : "error: compruebe que las contraseñas no coincidan o que el nombre de usuario no este en uso"
+            })
 
 def signin(request):
      if request.method == 'GET':
@@ -41,7 +50,14 @@ def signin(request):
         else:
             login(request, user)
             return redirect("home")
-     
+        
+def perfil(request):
+    if request.method == 'GET':
+        list = Allergy.objects.all()
+        return render(request, 'perfil.html', {"list":list})
+    else:
+        return redirect("home")
+   
 @login_required 
 def signout(request):
     logout(request)

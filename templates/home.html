@@ -1,14 +1,6 @@
 {% if user.is_authenticated %}
 bienvenido {{user.username}}
 <a href="{% url "logout" %}">Salir</a>
-<h1>Tus alergias:</h1>
-<ul>
-    {% for allergy in list %}
-    <li>
-        {{ allergy.name }}
-    </li>
-    {% endfor %}
-</ul>
 {% else %}
 bienvenido invitado
 <h1>Alergias disponibles:</h1>
@@ -18,4 +10,5 @@ bienvenido invitado
     {% endfor %}
 </form>
 {% endif %}
+
 

@@ -1,0 +1,15 @@
+{% if user.is_authenticated %}
+<h1>{{user.username}}</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for allergy in list %}
+    <label><input type="checkbox">{{allergy.name}}</label>
+    {% endfor %}
+    <button type="submit">Guardar</button>
+</form>
+
+{% else %}
+<p>Sesión no iniciada</p>
+<a href="http://127.0.0.1:8000/login/">Inicia Sesión aquí</a> o <a href="http://127.0.0.1:8000/signup/">Registrate aquí</a>
+</p>
+{% endif %}
