@@ -1,15 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class allergy(models.Model):
+class Ingredient(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ManyToManyField(User, blank=True)
+    def __str__(self):
+        return self.name
 
-class ingredient(models.Model):
+class Allergy(models.Model):
     name = models.CharField(max_length=100)
-    allergies = models.ManyToManyField(allergy, blank=True)
+    users = models.ManyToManyField(User, blank=True)
+    ingredients = models.ManyToManyField(Ingredient, blank=False)
 
-class product(models.Model):
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
     name = models.CharField(max_length=100)
-    ingredients = models.ManyToManyField(ingredient, blank=True)
+    ingredients = models.ManyToManyField(Ingredient, blank=False)
+
+    class Meta:
+        ordering = ["name"]
+        
+    def __str__(self):
+        return self.name
 

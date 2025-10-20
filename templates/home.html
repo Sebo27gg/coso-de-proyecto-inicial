@@ -1,6 +1,21 @@
 {% if user.is_authenticated %}
-bienvenido {{user.username}}
-<a href="{% url "logout" %}">Salir</a>
+bienvenido
+<h3>{{user.username}}</h3>
+<ul>
+    <li>
+        <a href="{% url "perfil" %}">Configuracion</a>
+    </li>
+    <li>
+        <a href="{% url "logout" %}">Salir</a>
+    </li>
+</ul>
+<h2>Tus alergias</h2>
+<ul>
+    {% for allergy in list %}
+    <li>{{allergy.name}}</li>
+    {% endfor %}
+</ul>
+
 {% else %}
 bienvenido invitado
 <h1>Alergias disponibles:</h1>
