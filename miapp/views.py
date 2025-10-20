@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Allergy
+from .models import Allergy, Product
+from django.db.models import Q
 
 # Create your views here.
 
@@ -71,3 +72,24 @@ def perfil(request):
 def signout(request):
     logout(request)
     return redirect("index")
+
+def product_list(request):
+    query = request.GET.get('q')
+    products = Product.objects.all()
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
+    context = {
+        'products': products,
+        'query': query,
+    }
+    return render(request, 'product_list.html', context)
+def product_detail(request, slug):
+    # Busca el producto por su slug. Si no lo encuentra, arroja un error 404.
+    product = get_object_or_404(Product, slug=slug)
+    context = {
+        'product': product,
+    }
+    return render(request, 'product_detail.html', context)
