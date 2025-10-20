@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
@@ -23,10 +24,16 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     class Meta:
         ordering = ["name"]
-        
     def __str__(self):
         return self.name
+
     def save(self, *args, **kwargs):
+        print(f"--- Entrando al método save para: '{self.name}' ---")
         if not self.slug:
+            print(f"--- El slug está vacío. Creando uno nuevo. ---")
             self.slug = slugify(self.name)
+        else:
+            print(f"--- El slug ya existe: '{self.slug}'. No se hace nada. ---")
         super().save(*args, **kwargs)
+    
+        

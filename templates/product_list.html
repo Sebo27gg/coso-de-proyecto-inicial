@@ -4,11 +4,8 @@
     <title>Our Products</title>
 </head>
 <body>
-    <h1>Search Products 🔍</h1>
+    <h1>Buscador de productos 🔍</h1>
 
-    <form method="GET" action="{% url 'product_list' %}">
-        <input type="text" name="q" placeholder="Buscar productos..." value="{{ query|default:'' }}">
-        <button type="submit">Buscar</button>
 </form>
 
     <hr>
