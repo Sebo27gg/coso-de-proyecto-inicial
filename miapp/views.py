@@ -80,16 +80,16 @@ def product_list(request):
         products = Product.objects.filter(name__icontains=query)
     else:
         products = Product.objects.all()
-    
-    context = {
+    return render(request, 'product_list.html', {
         'products': products,
         'query': query,
-    }
-    return render(request, 'product_list.html', context)
+    })
+
 def product_detail(request, slug):
     # Busca el producto por su slug. Si no lo encuentra, arroja un error 404.
     product = get_object_or_404(Product, slug=slug)
-    context = {
+    ingredients_list = product.ingredients.all()
+    return render(request, 'product_detail.html',  {
         'product': product,
-    }
-    return render(request, 'product_detail.html', context)
+        'ingredients': ingredients_list,
+    })

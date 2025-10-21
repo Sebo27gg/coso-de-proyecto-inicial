@@ -11,6 +11,7 @@ class Allergy(models.Model):
     name = models.CharField(max_length=100)
     users = models.ManyToManyField(User, blank=True)
     ingredients = models.ManyToManyField(Ingredient, blank=False)
+    
 
     class Meta:
         ordering = ["name"]

@@ -21,7 +21,6 @@
             <a href="{% url 'product_detail' slug=product.slug %}">
                 <strong>{{ product.name }}</strong>
             </a>
-            <p>{{ product.description }}</p>
         </li>
     {% empty %}
         <li>No products found.</li>
