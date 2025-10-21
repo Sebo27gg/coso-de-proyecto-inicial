@@ -75,12 +75,12 @@ def signout(request):
 
 def product_list(request):
     query = request.GET.get('q')
-    products = Product.objects.all()
+
     if query:
-        products = products.filter(
-            Q(name__icontains=query) |
-            Q(description__icontains=query)
-        )
+        products = Product.objects.filter(name__icontains=query)
+    else:
+        products = Product.objects.all()
+    
     context = {
         'products': products,
         'query': query,

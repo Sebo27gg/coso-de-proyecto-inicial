@@ -1,4 +1,5 @@
-bienvenido
+{% if user.is_authenticated %}
+Bienvenido {{user.username}}
 <h3>{{user.username}}</h3>
 <ul>
     <li>

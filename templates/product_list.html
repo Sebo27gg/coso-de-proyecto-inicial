@@ -6,7 +6,10 @@
 <body>
     <h1>Buscador de productos 🔍</h1>
 
-</form>
+    <form method="GET" action="{% url 'product_list' %}">
+        <input type="text" name="q" placeholder="Search products..." value="{{ query|default:'' }}">
+        <button type="submit">Search</button>
+    </form>
 
     <hr>
 
