@@ -1,4 +1,5 @@
 {% if user.is_authenticated %}
+<<<<<<< HEAD
 Bienvenido {{user.username}}
  <a href="http://127.0.0.1:8000/perfil/">Perfil</a>
     
@@ -6,6 +7,25 @@ Bienvenido {{user.username}}
 
     <p>"fotos de los productos y esas cosas probablemente"</p>
 <a href="{% url "logout" %}">Salir</a>
+=======
+bienvenido
+<h3>{{user.username}}</h3>
+<ul>
+    <li>
+        <a href="{% url "perfil" %}">Configuracion</a>
+    </li>
+    <li>
+        <a href="{% url "logout" %}">Salir</a>
+    </li>
+</ul>
+<h2>Tus alergias</h2>
+<ul>
+    {% for allergy in list %}
+    <li>{{allergy.name}}</li>
+    {% endfor %}
+</ul>
+
+>>>>>>> 2e0c2accc3db7e0d1513b68ad238e976ea40e8fc
 {% else %}
 bienvenido invitado
 <h1>Alergias disponibles:</h1>

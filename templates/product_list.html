@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Our Products</title>
+</head>
+<body>
+    <h1>Buscador de productos 🔍</h1>
+
+</form>
+
+    <hr>
+
+    <h2>Resultados</h2>
+
+<ul>
+    {% for product in products %}
+        <li>
+            <a href="{% url 'product_detail' slug=product.slug %}">
+                <strong>{{ product.name }}</strong>
+            </a>
+            <p>{{ product.description }}</p>
+        </li>
+    {% empty %}
+        <li>No products found.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
