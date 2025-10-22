@@ -1,29 +1,93 @@
-{% if user.is_authenticated %}
-Bienvenido {{user.username}}
-<h3>{{user.username}}</h3>
-<ul>
-    <li>
-        <a href="{% url "perfil" %}">Configuracion</a>
-    </li>
-    <li>
-        <a href="{% url "logout" %}">Salir</a>
-    </li>
-</ul>
-<h2>Tus alergias</h2>
-<ul>
-    {% for allergy in list %}
-    <li>{{allergy.name}}</li>
-    {% endfor %}
-</ul>
+{% extends 'base.html' %}
+{% load static %}
 
-{% else %}
-bienvenido invitado
-<h1>Alergias disponibles:</h1>
-<form action="">
-    {% for allergy in list %}
-    <label><input type="checkbox">{{allergy.name}}</label>
-    {% endfor %}
-</form>
-{% endif %}
+{% block title %}
+<title>Home Page</title>
+{% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if request.user.is_authenticated %}
+        <div class="card">
+            <div class="user-header">
+                <div class="user-avatar">
+                    {{ user.username | first |upper }}
+                </div>
+                <div class="user-info">
+                    <h1>Bienvenido, {{ user.username }}</h1>
+                    <p>Gestiona tu perfil y alergias</p>
+                </div>
+            </div>
+            
+            <div class="user-menu">
+                <ul>
+                    <li>
+                        <a href="{% url 'perfil' %}" class="menu-link">
+                            <i class="fas fa-cog"></i> Configuración
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}" class="menu-link logout">
+                            <i class="fas fa-sign-out-alt"></i> Salir
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="allergies-section">
+                <h2 class="section-title">
+                    <i class="fas fa-allergies"></i> Tus alergias
+                </h2>
+                <ul class="allergies-list">
+                    {% for allergy in list %}
+                    <li class="allergy-item">
+                        <div class="allergy-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <span class="allergy-name">{{ allergy.name }}</span>
+                    </li>
+                    {% empty %}
+                    <li class="allergy-item">
+                        <div class="allergy-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <span class="allergy-name">No tienes alergias registradas</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% else %}
+        <div class="card" style="display: block;">
+            <div class="guest-welcome">
+                <h1>Bienvenido invitado</h1>
+                <p>Selecciona tus alergias para personalizar tu experiencia</p>
+            </div>
+            
+            <div class="allergies-form">
+                <h2 class="form-title">Alergias disponibles</h2>
+                <form action="">
+                    <div class="checkbox-grid">
+                        {% for allergy in list %}
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="allergy-{{ forloop.counter }}" name="allergies" value="{{ allergy.id }}">
+                            <label for="allergy-{{ forloop.counter }}">{{ allergy.name }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="submit-btn">Guardar selección</button>
+                </form>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+{% endblock %}
+{% block script %}
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}
 

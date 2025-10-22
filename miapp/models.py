@@ -29,12 +29,8 @@ class Product(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        print(f"--- Entrando al método save para: '{self.name}' ---")
         if not self.slug:
-            print(f"--- El slug está vacío. Creando uno nuevo. ---")
             self.slug = slugify(self.name)
-        else:
-            print(f"--- El slug ya existe: '{self.slug}'. No se hace nada. ---")
         super().save(*args, **kwargs)
     
         

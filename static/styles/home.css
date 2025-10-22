@@ -1,0 +1,276 @@
+:root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4cc9f0;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --success-color: #4bb543;
+            --danger-color: #dc3545;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+            background-color: #f5f7fb;
+            color: var(--dark-color);
+            line-height: 1.6;
+}
+
+.container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+}
+
+        /* ===== TARJETA PRINCIPAL ===== */
+.card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            transition: var(--transition);
+}
+
+.card:hover {
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+        /* ===== ENCABEZADO DE USUARIO ===== */
+.user-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eaeaea;
+}
+
+        .user-avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .user-info h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .user-info p {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        /* ===== MENÚ DE NAVEGACIÓN ===== */
+        .user-menu {
+            margin-bottom: 30px;
+        }
+
+        .user-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .user-menu li {
+            flex: 1;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .menu-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .menu-link.logout {
+            background-color: #ffeaea;
+            color: var(--danger-color);
+        }
+
+        .menu-link.logout:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        /* ===== SECCIÓN DE ALERGIAS ===== */
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .allergies-list {
+            list-style: none;
+        }
+
+        .allergy-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .allergy-item:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .allergy-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #e2f0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+
+        .allergy-name {
+            font-weight: 500;
+        }
+
+        /* ===== ESTILOS PARA USUARIO NO AUTENTICADO ===== */
+        .guest-welcome {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .guest-welcome h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .guest-welcome p {
+            color: #6c757d;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .allergies-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            text-align: center;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: var(--light-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .checkbox-item:hover {
+            background-color: #e2f0ff;
+        }
+
+        .checkbox-item input {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .checkbox-item label {
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .user-menu ul {
+                flex-direction: column;
+            }
+            
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .user-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+}
