@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Allergy, Product
-from django.db.models import Q
 
 # Create your views here.
 
