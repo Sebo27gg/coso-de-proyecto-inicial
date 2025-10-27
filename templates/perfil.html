@@ -1,12 +1,23 @@
-<h1>{{user.username}}</h1>
-<form method="post">
-    {% csrf_token %}
-    {% for allergy in allergies %}
-    <p><label><input type="checkbox" name="{{allergy.id}}"
-        {% if allergy in user_allergies %}
-        checked
-        {% endif %}        
-        >{{allergy.name}}</label></p>
-    {% endfor %}
-    <button type="submit">Guardar</button>
-</form>
+{% extends "base.html" %}
+
+{% block title %}
+    <title> Configuracion </title>
+{% endblock title %}
+
+{% block content %}
+    <h1>{{user.username}}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for allergy in allergies %}
+        <p>
+            <label><input type="checkbox" name="{{allergy.id}}"
+            {% if allergy in user_allergies %}
+            checked
+            {% endif %}        
+            >{{allergy.name}}</label>
+        </p>
+        {% endfor %}
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{% url "home" %}">Volver</a>
+{% endblock content %}

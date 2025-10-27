@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-<title>Home Page</title>
-{% endblock %}
+    <title>Home Page</title>
+{% endblock title%}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
-{% endblock %}
+{% endblock styles%}
 
 {% block content %}
     <div class="container">
@@ -43,7 +43,7 @@
                     <i class="fas fa-allergies"></i> Tus alergias
                 </h2>
                 <ul class="allergies-list">
-                    {% for allergy in list %}
+                    {% for allergy in allergies %}
                     <li class="allergy-item">
                         <div class="allergy-icon">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -72,7 +72,7 @@
                 <h2 class="form-title">Alergias disponibles</h2>
                 <form action="">
                     <div class="checkbox-grid">
-                        {% for allergy in list %}
+                        {% for allergy in allergies %}
                         <div class="checkbox-item">
                             <input type="checkbox" id="allergy-{{ forloop.counter }}" name="allergies" value="{{ allergy.id }}">
                             <label for="allergy-{{ forloop.counter }}">{{ allergy.name }}</label>
@@ -85,10 +85,38 @@
         </div>
         {%endif%}
     </div>
+    <h1>Buscador de productos 🔍</h1>
 
-{% endblock %}
+    <form method="GET">
+        {% if not request.user.is_authenticated%}
+
+        {% endif %}
+        <input type="text" name="q" placeholder="Buscar productos..." value="{{ query | default:'' }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <hr>
+
+    <h2>Resultados</h2>
+
+<ul>
+    {% for product in products %}
+        <li>
+            <a href="{% url 'product_detail' slug=product.slug %}">
+                <strong>{{ product.name }} 
+                    {% if product in banned %}
+                    NO PUEDES COMER ESTO KLASJDSHAD
+                    {% endif %}
+                </strong>
+            </a>
+        </li>
+    {% empty %}
+        <li>No products found.</li>
+    {% endfor %}
+
+{% endblock content %}
+
 {% block script %}
-
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-{% endblock %}
+{% endblock script%}
 

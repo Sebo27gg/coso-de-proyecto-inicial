@@ -1,17 +1,16 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
     <title>Index</title>
+{% endblock title %}
+
+{% block styles %}
     <link rel="stylesheet" href="{% static 'styles/index.css' %}">
-</head>
-<body>
-    <head>
-        <h1> Nombre del Proyecto </h1>
-    </head>
+{% endblock styles %}
+
+{% block content %}
+    <h1> Nombre del Proyecto </h1>
     <div>
         <h2>Info sobre la app</h2>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum nisi aliquid minus. Incidunt quas perspiciatis laboriosam eum, rerum at ipsum veritatis natus facilis amet mollitia quia reiciendis, architecto est? Delectus aliquid voluptas laboriosam vel ad unde iure facilis nulla repellendus hic commodi suscipit, fugit natus alias quidem. Architecto, perspiciatis ipsam!</p>
@@ -32,13 +31,5 @@
                 <a href="{% url "signup" %}">Registrarse</a>
             </li>
         </ul>
-        <h3>Productos</h3>
-        <ul>
-            <li>
-                <a href="{% url 'product_list' %}">Ver lista de productos</a>
-            </li>
-        </ul>
-
     </div>
-</body>
-</html>
+{% endblock content %}

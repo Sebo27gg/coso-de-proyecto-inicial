@@ -17,10 +17,25 @@ def index(request):
 def home(request):
     if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
-        list = user.allergy_set.all()
+        allergy_list = user.allergy_set.all()
     else:
-        list = Allergy.objects.all()
-    return render(request, 'home.html', {"list": list})
+        allergy_list = Allergy.objects.all()
+    
+    query = request.GET.get('q')
+
+    if query:
+        products_list = Product.objects.filter(name__icontains=query)
+    else:
+        products_list = Product.objects.all()
+    
+    banned_products = []
+    for product in products_list:
+        for ingredient in product.ingredients.all():    
+            for allergy in allergy_list:
+                if ingredient in allergy.ingredients.all():
+                    banned_products.append(product)
+
+    return render(request, 'home.html', {"allergies": allergy_list,"query": query, "products" : products_list, "banned" : banned_products})
 
 def signup(request):
     if request.method == 'GET':
