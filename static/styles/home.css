@@ -6,6 +6,7 @@
         --dark-color: #212529;
         --success-color: #4bb543;
             --danger-color: #dc3545;
+            --light-danger-color: #e95564;
             --border-radius: 8px;
             --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
@@ -273,4 +274,93 @@ body {
                 margin-right: 0;
                 margin-bottom: 15px;
             }
+}
+.card.search-card {
+    background: var(--light-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    transition: var(--transition);
+}
+.card.search-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.search-container {
+    h1 {color : var(--success-color);
+        text-align: center;
+    }
+    form {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+}
+h2 {
+    color : var(--dark-color);
+    text-align: center;
+}
+.search-input {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid var(--light-color);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: var(--transition);
+}
+.search-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px var(--accent-color);
+}
+.search-input:hover {
+    border-color: var(--accent-color);
+}
+.search-submitbtn {
+    display: block;
+    width: 25%;
+    padding: 12px;
+    margin-left: 37.5%;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.search-submitbtn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+.item-product {
+    text-align: center;
+    margin-bottom: 67px;
+    margin-top: 20px;
+}
+.item-warning {
+    text-align: center;
+    margin-bottom: 67px;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .shown-item {
+       display: block;
+        margin: 0 auto;
+        margin-bottom: 2px;
+        width: 200px;
+        block-size: auto;
+        background-color: var(--light-danger-color);
+        
+    }
+    .shown-item:hover {
+        background-color: var(--danger-color);
+        color: white;
+    }
+}
+.No-Found {
+    text-align: center;
+    color: var(--danger-color);
+    margin-bottom: 60px;
 }

@@ -85,29 +85,31 @@
         </div>
         {%endif%}
     </div>
-    <h1>Buscador de productos 🔍</h1>
+    <div class="card search-card">
+        <div class="search-container">
+        <h1>Buscador de productos 🔍</h1>
+        <form method="GET">
+            {% if not request.user.is_authenticated%}
+                {% for allergy in allergies %}
+                <p>
+                    <label><input type="checkbox" name="{{allergy.id}}">{{allergy.name}}</label>
+                </p>
+                {% endfor %}
+            {% endif %}
+            <input type="text" class= "search-input" name="q" placeholder="Buscar productos..." value="{{ query | default:'' }}">
+            <button type="submit" class="search-submitbtn">Buscar</button>
+        </form>
 
-    <form method="GET">
-        {% if not request.user.is_authenticated%}
-            {% for allergy in allergies %}
-            <p>
-                <label><input type="checkbox" name="{{allergy.id}}">{{allergy.name}}</label>
-            </p>
-            {% endfor %}
-        {% endif %}
-        <input type="text" name="q" placeholder="Buscar productos..." value="{{ query | default:'' }}">
-        <button type="submit">Buscar</button>
-    </form>
-
-    <hr>
-
-    <h2>Resultados</h2>
-
-<ul>
+        <hr>
+        </div>
+    </div> 
+    <h2>Resultados</h2> 
+ 
     {% for product in products %}
-        <li>
+    
+        <li {% if product in banned %} class="item-warning" {% else %} class="item-product" {% endif %}>
             <a href="{% url 'product_detail' slug=product.slug %}">
-                <strong>
+                <strong  class="shown-item">
                     {{ product.name }} 
                 </strong>
             </a>
@@ -116,7 +118,7 @@
             {% endif %}
         </li>
     {% empty %}
-        <li>No products found.</li>
+        <li class="No-Found">No products found.</li>
     {% endfor %}
 
 {% endblock content %}
