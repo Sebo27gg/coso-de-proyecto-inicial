@@ -89,7 +89,11 @@
 
     <form method="GET">
         {% if not request.user.is_authenticated%}
-
+            {% for allergy in allergies %}
+            <p>
+                <label><input type="checkbox" name="{{allergy.id}}">{{allergy.name}}</label>
+            </p>
+            {% endfor %}
         {% endif %}
         <input type="text" name="q" placeholder="Buscar productos..." value="{{ query | default:'' }}">
         <button type="submit">Buscar</button>
@@ -103,12 +107,13 @@
     {% for product in products %}
         <li>
             <a href="{% url 'product_detail' slug=product.slug %}">
-                <strong>{{ product.name }} 
-                    {% if product in banned %}
-                    NO PUEDES COMER ESTO KLASJDSHAD
-                    {% endif %}
+                <strong>
+                    {{ product.name }} 
                 </strong>
             </a>
+            {% if product in banned %}
+                <p>NO PUEDES COMER ESTO</p>
+            {% endif %}
         </li>
     {% empty %}
         <li>No products found.</li>
