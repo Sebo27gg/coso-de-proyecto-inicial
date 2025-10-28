@@ -1,3 +1,17 @@
+:root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4cc9f0;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --success-color: #4bb543;
+            --danger-color: #dc3545;
+            --light-danger-color: #e95564;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
 body {
     background: rgb(253, 240, 251);
     font-family: 'Times New Roman', Times, serif;

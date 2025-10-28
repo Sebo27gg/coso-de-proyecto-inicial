@@ -4,9 +4,12 @@
         --accent-color: #4cc9f0;
         --light-color: #f8f9fa;
         --dark-color: #212529;
+        --dark-success-color: #196619;
         --success-color: #4bb543;
+        --light-success-color: #a8eab8;
             --danger-color: #dc3545;
-            --light-danger-color: #e95564;
+            --allergy-color: #ff6b6b;
+            --light-danger-color: #ffeaea;
             --border-radius: 8px;
             --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
@@ -301,6 +304,7 @@ h2 {
     color : var(--dark-color);
     text-align: center;
 }
+
 .search-input {
     width: 50%;
     padding: 12px;
@@ -339,6 +343,22 @@ h2 {
     text-align: center;
     margin-bottom: 67px;
     margin-top: 20px;
+    color: var(--dark-color);
+    .shown-item {
+       display: block;
+       border-radius: var(--border-radius);
+        margin: 0 auto;
+        margin-bottom: 2px;
+        width: 200px;
+        block-size: auto;
+        background-color: var(--light-color);
+        transition: 500ms;
+        box-shadow: var(--box-shadow);
+    }
+    .shown-item:hover {
+        background-color: var(--light-success-color);
+        color: var(--dark-success-color);
+    }
 }
 .item-warning {
     text-align: center;
@@ -347,17 +367,28 @@ h2 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     .shown-item {
        display: block;
+       border-radius: var(--border-radius);
         margin: 0 auto;
         margin-bottom: 2px;
         width: 200px;
         block-size: auto;
-        background-color: var(--light-danger-color);
+        background-color: #ffeaea;
+        transition: 500ms;
+        box-shadow: var(--box-shadow);
         
     }
     .shown-item:hover {
-        background-color: var(--danger-color);
+        background-color: var(--allergy-color);
         color: white;
     }
+ 
+}
+/* AÑADE ESTO al CSS existente */
+.item-product a,
+.item-warning a {
+    display: inline-block; /* Cambia de inline a inline-block */
+    width: 200px; /* Limita el ancho del enlace */
+    text-decoration: none; /* Opcional: quita subrayado */
 }
 .No-Found {
     text-align: center;
