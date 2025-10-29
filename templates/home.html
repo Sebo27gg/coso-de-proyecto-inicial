@@ -61,7 +61,7 @@
                 </ul>
             </div>
         </div>
-        {% else %}
+        {% else %} <!--unimos los formularios-->
         <div class="card" style="display: block;">
             <div class="guest-welcome">
                 <h1>Bienvenido invitado</h1>
@@ -70,7 +70,7 @@
             
             <div class="allergies-form">
                 <h2 class="form-title">Alergias disponibles</h2>
-                <form action="">
+                <form action="GET" action="">
                     <div class="checkbox-grid">
                         {% for allergy in allergies %}
                         <div class="checkbox-item">
@@ -108,8 +108,10 @@
     {% for product in products %}
     
         <li {% if product in banned %} class="item-warning" {% else %} class="item-product" {% endif %}>
-            <img src="{{ product.photo.url }}">
             <a href="{% url 'product_detail' slug=product.slug %}">
+                <div class='image-container'>
+                    <img src="{{ product.photo.url }}" alt="{{ product.name }}">
+                </div>
                 <strong  class="shown-item">
                     {{ product.name }} 
                 </strong>
