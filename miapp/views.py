@@ -16,7 +16,7 @@ def index(request):
 
 #Home: Buscador de alimentos
 def home(request):  
-    query = request.GET.get('q')
+    query = request.GET.get('search')
 
     if query:
         products_list = Product.objects.filter(name__icontains=query)

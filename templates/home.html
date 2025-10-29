@@ -96,7 +96,7 @@
                 </p>
                 {% endfor %}
             {% endif %}
-            <input type="text" class= "search-input" name="q" placeholder="Buscar productos..." value="{{ query | default:'' }}">
+            <input type="text" class= "search-input" name="search" placeholder="Buscar productos..." value="{{ query | default:'' }}">
             <button type="submit" class="search-submitbtn">Buscar</button>
         </form>
 
@@ -108,6 +108,7 @@
     {% for product in products %}
     
         <li {% if product in banned %} class="item-warning" {% else %} class="item-product" {% endif %}>
+            <img src="{{ product.photo.url }}">
             <a href="{% url 'product_detail' slug=product.slug %}">
                 <strong  class="shown-item">
                     {{ product.name }} 
