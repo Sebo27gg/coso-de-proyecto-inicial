@@ -4,3 +4,4 @@ miapp/migrations/
 miapp/__pycache__/
 miapp/__init__.py 
 .vscode/
+.DS_Store
