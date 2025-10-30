@@ -3,3 +3,4 @@ cosito/__init__.py
 miapp/migrations/
 miapp/__pycache__/
 miapp/__init__.py 
+.vscode/

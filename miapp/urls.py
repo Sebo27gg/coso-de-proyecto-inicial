@@ -9,6 +9,5 @@ urlpatterns = [
     path('logout/', views.signout, name="logout"),
     path('settings/', views.perfil, name="perfil"),
     path('product/<slug:slug>/', views.product_detail, name='product_detail'),
-
 ]
 

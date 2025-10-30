@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Allergy, Product
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -16,21 +17,30 @@ def index(request):
 
 #Home: Buscador de alimentos
 def home(request):  
-    query = request.GET.get('search')
+    # Logica de interfaz de productos y paginacion
+    search_query = request.GET.get('search')
+    page_query = request.GET.get('page')
+    allergy_query = '&'.join([f'{id}={value}' for id, value in request.GET.items() if id not in ["search", "page"]]) + '&'
 
-    if query:
-        products_list = Product.objects.filter(name__icontains=query)
+    if not page_query:
+        page_query = 1
+
+    if search_query:
+        products_list = Product.objects.filter(name__icontains=search_query)
     else:
         products_list = Product.objects.all()
+    products_page = Paginator(products_list, 4).get_page(page_query)
 
+    # Logica de detector de comidas peligrosas
     if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
         user_allergies = user.allergy_set.all()
     else:
         allergy_list = Allergy.objects.all()
         user_allergies = []
-        for id in list(request.GET)[:-1]:
-            user_allergies.append(Allergy.objects.get(id=int(id)))
+        for data in allergy_query:
+            if data.isnumeric():
+                user_allergies.append(Allergy.objects.get(id=int(data)))
                       
     banned_products = []
     for product in products_list:
@@ -41,9 +51,10 @@ def home(request):
 
     return render(request, 'home.html', {
         "allergies": user_allergies if request.user.is_authenticated else allergy_list,
-        "query": query,
-        "products" : products_list,
-        "banned" : banned_products
+        "search": search_query,
+        "allergys_on": allergy_query,
+        "products" : products_page,
+        "banned" : banned_products,
         })
 
 #Signup: Creacion de cuenta

@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-    <title>Home Page</title>
-{% endblock title%}
+{% block title %}Home Page{% endblock title%}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
@@ -11,7 +9,7 @@
 
 {% block content %}
     <div class="container">
-        {% if request.user.is_authenticated %}
+        {% if user.is_authenticated %}
         <div class="card">
             <div class="user-header">
                 <div class="user-avatar">
@@ -89,14 +87,14 @@
         <div class="search-container">
         <h1>Buscador de productos 🔍</h1>
         <form method="GET">
-            {% if not request.user.is_authenticated%}
+            {% if not user.is_authenticated%}
                 {% for allergy in allergies %}
                 <p>
                     <label><input type="checkbox" name="{{allergy.id}}">{{allergy.name}}</label>
                 </p>
                 {% endfor %}
             {% endif %}
-            <input type="text" class= "search-input" name="search" placeholder="Buscar productos..." value="{{ query | default:'' }}">
+            <input type="text" class= "search-input" name="search" placeholder="Buscar productos..." value="{{ search|default:'' }}">
             <button type="submit" class="search-submitbtn">Buscar</button>
         </form>
 
@@ -123,6 +121,23 @@
     {% empty %}
         <li class="No-Found">No products found.</li>
     {% endfor %}
+
+    <div >
+        <span>
+            {% if products.has_previous %} 
+                <a href="?{{ allergys_on }}search={{ search|default:'' }}&page={{ products.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span>
+                Pagina {{ products.number }} de {{ products.paginator.num_pages }}
+            </span>
+
+            {% if products.has_next %}
+                <a href="?{{ allergys_on }}search={{ search|default:'' }}&page={{ products.next_page_number }}">Siguiente</a>
+            {% endif %}
+        </span>
+    </div>
+
 
 {% endblock content %}
 
