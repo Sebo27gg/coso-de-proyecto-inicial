@@ -64,10 +64,11 @@
 
     </div>
 
-    <!-- USUARIO INVITADO - ANONYMOUS -->
+<!--USUARIO anonymous-->
 <div class="container">
     <div class="card">
         {% if not user.is_authenticated %}
+        
         <div class="guest-welcome">
             <h1>Bienvenido invitado</h1>
             <p>Selecciona tus alergias para personalizar tu experiencia</p>
@@ -91,10 +92,10 @@
                     </div>
                     {% endfor %}
                 </div>
-                <!-- BOTÓN CENTRADO PARA SELECCIONAR ALERGIAS -->
+                
                 <div class="allergies-btn-container">
-                    <button type="button" class="allergies-select-btn" onclick="selectAllAllergies()">
-                        <i class="fas fa-check-double"></i> Seleccionar todas las alergias
+                    <button type="submit" class="allergies-select-btn">
+                        <i class="fas fa-check-double"></i> Aplicar filtros de alergias
                     </button>
                 </div>
             </div>
@@ -103,13 +104,16 @@
             <!-- BUSCADOR CON BOTÓN A LA IZQUIERDA -->
             <div class="search-box">
                 <button type="submit" class="submit-btn search-submit">
-                    <i class="fas fa-search"></i> Buscar
+                    <i class="fas fa-search"></i> Buscar productos
                 </button>
                 <input type="text" class="search-input" name="search" placeholder="Buscar productos..." value="{{ search|default:'' }}">
             </div>
         </form>
     </div>
 </div>
+
+
+
     <h2>Resultados</h2> 
  
     {% for product in products %}
