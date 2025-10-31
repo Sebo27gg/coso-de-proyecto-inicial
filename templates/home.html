@@ -59,48 +59,57 @@
                 </ul>
             </div>
         </div>
-        {% else %} <!--unimos los formularios-->
-        <div class="card" style="display: block;">
-            <div class="guest-welcome">
-                <h1>Bienvenido invitado</h1>
-                <p>Selecciona tus alergias para personalizar tu experiencia</p>
-            </div>
-            
+        
+        {%endif%}
+
+    </div>
+
+    <!-- USUARIO INVITADO - ANONYMOUS -->
+<div class="container">
+    <div class="card">
+        {% if not user.is_authenticated %}
+        <div class="guest-welcome">
+            <h1>Bienvenido invitado</h1>
+            <p>Selecciona tus alergias para personalizar tu experiencia</p>
+        </div>
+        {% endif %}
+        
+        <div class="search-header">
+            <h1>Buscador de productos 🔍</h1>
+        </div>
+
+        <form method="GET">
+            {% if not user.is_authenticated %}
             <div class="allergies-form">
                 <h2 class="form-title">Alergias disponibles</h2>
-                <form action="GET" action="">
-                    <div class="checkbox-grid">
-                        {% for allergy in allergies %}
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="allergy-{{ forloop.counter }}" name="allergies" value="{{ allergy.id }}">
-                            <label for="allergy-{{ forloop.counter }}">{{ allergy.name }}</label>
-                        </div>
-                        {% endfor %}
+                <div class="checkbox-grid">
+                    {% for allergy in allergies %}
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="allergy-{{ allergy.id }}" name="{{ allergy.id }}" 
+                               value="{{ allergy.id }}" {% if allergy.id|stringformat:"i" in request.GET %}checked{% endif %}>
+                        <label for="allergy-{{ allergy.id }}">{{ allergy.name }}</label>
                     </div>
-                    <button type="submit" class="submit-btn">Guardar selección</button>
-                </form>
+                    {% endfor %}
+                </div>
+                <!-- BOTÓN CENTRADO PARA SELECCIONAR ALERGIAS -->
+                <div class="allergies-btn-container">
+                    <button type="button" class="allergies-select-btn" onclick="selectAllAllergies()">
+                        <i class="fas fa-check-double"></i> Seleccionar todas las alergias
+                    </button>
+                </div>
             </div>
-        </div>
-        {%endif%}
-    </div>
-    <div class="card search-card">
-        <div class="search-container">
-        <h1>Buscador de productos 🔍</h1>
-        <form method="GET">
-            {% if not user.is_authenticated%}
-                {% for allergy in allergies %}
-                <p>
-                    <label><input type="checkbox" name="{{allergy.id}}">{{allergy.name}}</label>
-                </p>
-                {% endfor %}
             {% endif %}
-            <input type="text" class= "search-input" name="search" placeholder="Buscar productos..." value="{{ search|default:'' }}">
-            <button type="submit" class="search-submitbtn">Buscar</button>
-        </form>
 
-        <hr>
-        </div>
-    </div> 
+            <!-- BUSCADOR CON BOTÓN A LA IZQUIERDA -->
+            <div class="search-box">
+                <button type="submit" class="submit-btn search-submit">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+                <input type="text" class="search-input" name="search" placeholder="Buscar productos..." value="{{ search|default:'' }}">
+            </div>
+        </form>
+    </div>
+</div>
     <h2>Resultados</h2> 
  
     {% for product in products %}
