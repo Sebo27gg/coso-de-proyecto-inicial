@@ -41,7 +41,8 @@ def home(request):
         for data in allergy_query:
             if data.isnumeric():
                 user_allergies.append(Allergy.objects.get(id=int(data)))
-                      
+
+    # TODO: disminuir la complejidad de esta busqueda
     banned_products = []
     for product in products_list:
         for ingredient in product.ingredients.all():    

@@ -87,7 +87,7 @@
                     {% for allergy in allergies %}
                     <div class="checkbox-item">
                         <input type="checkbox" id="allergy-{{ allergy.id }}" name="{{ allergy.id }}" 
-                               value="{{ allergy.id }}" {% if allergy.id|stringformat:"i" in request.GET %}checked{% endif %}>
+                            {% if allergy.id|stringformat:"i" in request.GET %}checked{% endif %}>
                         <label for="allergy-{{ allergy.id }}">{{ allergy.name }}</label>
                     </div>
                     {% endfor %}
