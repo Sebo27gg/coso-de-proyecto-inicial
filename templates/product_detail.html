@@ -3,6 +3,9 @@
 {% block title %}Producto - {{product.name}} {% endblock title %}
 
 {% block content %}
+    <a href="{% url 'view_favorites' %}" style="text-decoration: none; margin-bottom: 15px; display: inline-block;">
+        Ir a Mis Favoritos
+    </a>
     <h1>{{ product.name }}</h1>
     <img src="{{ product.photo.url }}">
     <p><strong>Descripción:</strong></p>
@@ -11,7 +14,19 @@
         {{ingredient.name}} {% if not forloop.last %}, {% endif %}
         {% endfor %}
     </p>
-
+    <form action="{% url 'add_to_favorites' product.id %}" method="POST" style="display: inline;">
+    {% csrf_token %}
+    
+    {% if product in user.favorite_products.all %}
+        <button type="submit" class="btn btn-danger">
+            Quitar de Favoritos 💔
+        </button>
+    {% else %}
+        <button type="submit" class="btn btn-primary">
+            Añadir a Favoritos ❤️
+        </button>
+    {% endif %}
+</form>
     <br>-
     <a href="{% url 'home' %}">Volver</a>
 {% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+    <h2>Mis Productos Favoritos</h2>
+    <a href="{% url 'home' %}" style="text-decoration: none; margin-bottom: 15px; display: inline-block;">
+        Volver a Home
+    </a>
+    <hr>
+    
+    {% if favorites %}
+        <div class="row">
+            {% for product in favorites %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="{{ product.photo.url }}" 
+                         class="card-img-top" 
+                         alt="{{ product.name }}"
+                         style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                            
+                            <form action="{% url 'add_to_favorites' product.id %}" method="POST" class="mt-2">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    Quitar 💔
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="lead">Aún no has añadido ningún producto a tus favoritos.</p>
+        {% endif %}
+    
+</div>
+{% endblock %}

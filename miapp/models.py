@@ -1,17 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.utils.deconstruct import deconstructible
 from django.core.exceptions import ValidationError
 import os
 
 # Funcion path_and_rename: Sirve unica y exclusivamente para que las imagenes de los productos se guarden
 # automaticamente con su nombre en media/products
-def path_and_rename(path):
-    def wrapper(instance, filename):
+@deconstructible
+class PathAndRename:
+    def __init__(self, sub_path):
+        self.path = sub_path
+
+    def __call__(self, instance, filename):
+        """
+        Esta es la lógica que antes estaba en tu función 'wrapper'.
+        """
         ext = filename.split('.')[-1]
+
+        # Asegura que el slug exista antes de intentar usarlo
+        if not instance.slug:
+            instance.slug = slugify(instance.name)
+
         filename = '{}.{}'.format(instance.slug, ext)
-        return os.path.join(path, filename)
-    return wrapper
+        return os.path.join(self.path, filename)
 
 # Modelo de Ingredientes
 class Ingredient(models.Model):
@@ -63,8 +75,8 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     ingredients = models.ManyToManyField(Ingredient, blank=False)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    photo = models.ImageField(upload_to=path_and_rename('products/'))
-    favorite_of = models.ManyToManyField(User, blank=True)
+    photo = models.ImageField(upload_to=PathAndRename('products/'), blank=True, null=True)
+    favorites = models.ManyToManyField(User,related_name='favorite_products', blank=True)
 
     class Meta: 
         ordering = ["name"]
