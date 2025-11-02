@@ -13,9 +13,6 @@ class PathAndRename:
         self.path = sub_path
 
     def __call__(self, instance, filename):
-        """
-        Esta es la lógica que antes estaba en tu función 'wrapper'.
-        """
         ext = filename.split('.')[-1]
 
         # Asegura que el slug exista antes de intentar usarlo
@@ -75,7 +72,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     ingredients = models.ManyToManyField(Ingredient, blank=False)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    photo = models.ImageField(upload_to=PathAndRename('products/'), blank=True, null=True)
+    photo = models.ImageField(upload_to=PathAndRename('products/'))
     favorites = models.ManyToManyField(User,related_name='favorite_products', blank=True)
 
     class Meta: 

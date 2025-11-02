@@ -11,7 +11,7 @@
     <p><strong>Descripción:</strong></p>
     <p>    
         {% for ingredient in ingredients %}
-        {{ingredient.name}} {% if not forloop.last %}, {% endif %}
+            {{ingredient.name}} {% if not forloop.last %}, {% endif %}
         {% endfor %}
     </p>
     <form action="{% url 'add_to_favorites' product.id %}" method="POST" style="display: inline;">

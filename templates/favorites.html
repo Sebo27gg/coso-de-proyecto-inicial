@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+
+{% block title %} Producto - favoritos{% endblock %}
+
+{% block content %}
 <div class="container">
     <h2>Mis Productos Favoritos</h2>
     <a href="{% url 'home' %}" style="text-decoration: none; margin-bottom: 15px; display: inline-block;">
@@ -32,7 +36,7 @@
         </div>
     {% else %}
         <p class="lead">Aún no has añadido ningún producto a tus favoritos.</p>
-        {% endif %}
+    {% endif %}
     
 </div>
 {% endblock %}

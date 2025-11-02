@@ -42,13 +42,14 @@ def home(request):
             if data.isnumeric():
                 user_allergies.append(Allergy.objects.get(id=int(data)))
 
-    # TODO: disminuir la complejidad de esta busqueda
+    banned_ingredients = set()
+    for allergy in user_allergies:
+        banned_ingredients.update(allergy.ingredients.all())
+    
     banned_products = []
-    for product in products_list:
-        for ingredient in product.ingredients.all():    
-            for allergy in user_allergies:
-                if ingredient in allergy.ingredients.all():
-                    banned_products.append(product)
+    for product in products_page:
+        if set(product.ingredients.all()) & banned_ingredients:
+            banned_products.append(product)
 
     return render(request, 'home.html', {
         "allergies": user_allergies if request.user.is_authenticated else allergy_list,
@@ -121,36 +122,25 @@ def product_detail(request, slug):
         'product': product,
         'ingredients': ingredient_list,
     })
-@login_required # Solo usuarios logueados pueden tener favoritos
+
+@login_required 
 def add_to_favorites(request, product_id):
-    # Obtenemos el producto que se quiere añadir
     product = get_object_or_404(Product, id=product_id)
     
-    # Usamos un método POST para seguridad
     if request.method == 'POST':
-        # Obtenemos al usuario actual
         user = request.user
         
-        # Comprobamos si el producto ya está en los favoritos del usuario
         if product in user.favorite_products.all():
-            # Si ya está, lo quitamos
             product.favorites.remove(user)
         else:
-            # Si no está, lo añadimos
-            product.favorites.add(user)
-            
+            product.favorites.add(user)         
     # Redirigimos al usuario a la página anterior
     # 'home' es un fallback por si no se encuentra la página anterior
     return redirect(request.META.get('HTTP_REFERER', 'home'))
 
-@login_required # Proteger la vista de favoritos
+@login_required 
 def view_favorites(request):
-    # Usamos el 'related_name' que definimos en el modelo
-    # para obtener todos los productos favoritos del usuario actual
     favorites = request.user.favorite_products.all()
-    
-    context = {
+    return render(request, 'favorites.html', {
         'favorites': favorites
-    }
-    # Renderizamos el nuevo template que crearemos en el siguiente paso
-    return render(request, 'favorites.html', context)
+    })
