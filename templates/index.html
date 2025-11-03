@@ -8,26 +8,23 @@
 {% endblock styles %}
 
 {% block content %}
-    <h1> Nombre del Proyecto </h1>
-    <div>
-        <h2>Info sobre la app</h2>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum nisi aliquid minus. Incidunt quas perspiciatis laboriosam eum, rerum at ipsum veritatis natus facilis amet mollitia quia reiciendis, architecto est? Delectus aliquid voluptas laboriosam vel ad unde iure facilis nulla repellendus hic commodi suscipit, fugit natus alias quidem. Architecto, perspiciatis ipsam!</p>
-    </div>
-    <div>
-        <h3>Pruebela</h3>
-        <ul>
-            <li>
-                <a href="{% url "home" %}">Entrar como invitado</a>
-            </li>
-        </ul>
-        <h3>Ingrese con su cuenta propia y registre alergias</h3>
-        <ul>
-            <li>
-                <a href="{% url "login" %}">Iniciar sesion</a>
-            </li>
-            <li>
-                <a href="{% url "signup" %}">Registrarse</a>
-            </li>
-        </ul>
+    <div class="grid">
+        <div class="info">
+        <h1> AllergEat </h1>
+        <h2> ¿Qué es AllergEat? </h2>
+        <p> AllergEat es una plataforma diseñada para facilitar la vida de las personas con alergias alimentarias. Nuestra misión es proporcionar información precisa y accesible sobre ingredientes y productos alimenticios, ayudando a los usuarios a tomar decisiones informadas y seguras al momento de elegir sus alimentos. </p>
+        </div>
+        <div class="enter">
+            <p> Puedes </p>
+            <a href="{% url 'home' %}" class="guest"> Entrar como invitado </a>
+            <p> Para ingresar sin iniciar sesión
+                o bien puedes
+            </p>
+            <a href="{% url 'login' %}" class="login"> Iniciar sesión </a>
+            <p> para mantener tus alergias guardadas cada vez que entres a la plataforma</p>
+            <a href="{% url 'signup' %}" class="signup"> Registrate </a>
+            <p> si aún no tienes una cuenta</p>
+            
+        </div>      
     </div>
 {% endblock content %}
