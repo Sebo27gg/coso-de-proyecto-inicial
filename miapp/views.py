@@ -144,3 +144,6 @@ def view_favorites(request):
     return render(request, 'favorites.html', {
         'favorites': favorites
     })
+
+def password_reset(request):
+    return redirect("password_reset")
