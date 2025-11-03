@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 
-# Index: pagina principal de informacion
+# Index: pagina principal de informacion   #a
 def index(request):
     if request.user.is_authenticated:
         return redirect("home")
