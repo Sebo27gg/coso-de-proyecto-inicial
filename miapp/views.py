@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 
-# Index: pagina principal de informacion   #a
+# Index: pagina principal de informacion
 def index(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -144,6 +144,3 @@ def view_favorites(request):
     return render(request, 'favorites.html', {
         'favorites': favorites
     })
-
-def password_reset(request):
-    return redirect("password_reset")
