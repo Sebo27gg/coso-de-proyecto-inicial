@@ -79,7 +79,7 @@ body {
 }
 
 .user-info p {
-    color: #6c757d;
+    color: #6c757d; 
     font-size: 16px;
 }
 
@@ -259,15 +259,6 @@ body {
 }
 
 /* ===== BUSCADOR CON BOTÓN A LA IZQUIERDA ===== */
-.search-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.search-header h1 {
-    font-size: 24px;
-    color: var(--dark-color);
-}
 
 .search-box {
     display: flex;
@@ -290,15 +281,58 @@ body {
     box-shadow: 0 0 5px rgba(67, 97, 238, 0.3);
 }
 
-.search-submitbtn:hover {
-    background-color: var(--secondary-color);
+/* BOTÓN DE BÚSQUEDA MÁS PEQUEÑO */
+.submit-btn.search-submit {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius) !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    white-space: nowrap !important;
+    min-width: 150px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center ;
+    justify-content: center;
+    gap: 8px ;
+}
+
+.search-btn-custom {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #4361ee;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.search-btn-custom:hover {
+    background-color: #3f37c9;
     transform: translateY(-2px);
 }
 
-.search-submitbtn i {
-    margin-right: 8px;
+.submit-btn.search-submit:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.submit-btn.search-submit i {
+    margin-right: 14px;
+}
 /* ===== BOTÓN PARA SELECCIONAR ALERGIAS ===== */
 .allergies-btn-container {
     display: flex;
