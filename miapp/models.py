@@ -72,7 +72,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     ingredients = models.ManyToManyField(Ingredient, blank=False)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    photo = models.ImageField(upload_to=PathAndRename('products/'))
+    photo = models.ImageField(upload_to=PathAndRename('products/'), blank=True, null=True)
     favorites = models.ManyToManyField(User,related_name='favorite_products', blank=True)
 
     class Meta: 

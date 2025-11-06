@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Allergy, Product
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # Create your views here.
 
@@ -26,7 +27,10 @@ def home(request):
         page_query = 1
 
     if search_query:
-        products_list = Product.objects.filter(name__icontains=search_query)
+        products_list = Product.objects.filter(
+            Q(name__icontains=search_query) |
+            Q(ingredients__name__icontains=search_query)
+        ).distinct()
     else:
         products_list = Product.objects.all()
     products_page = Paginator(products_list, 4).get_page(page_query)
