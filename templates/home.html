@@ -19,6 +19,9 @@
                     <h1>Bienvenido, {{ user.username }}</h1>
                     <p>Gestiona tu perfil y alergias</p>
                 </div>
+                <a href="{% url 'index' %}" class="home-link-button">
+                    <i class="fas fa-home"></i> Página de inicio
+                </a>
             </div>
             
             <div class="user-menu">
@@ -77,6 +80,9 @@
         <div class="guest-welcome">
             <h1>Bienvenido invitado</h1>
             <p>Selecciona tus alergias para personalizar tu experiencia</p>
+            <a href="{% url 'index' %}" class="home-link-button">
+                <i class="fas fa-home"></i> Página de inicio
+            </a>
         </div>
         {% endif %}
         
@@ -109,7 +115,7 @@
             <!-- BUSCADOR CON BOTÓN A LA IZQUIERDA -->
             <div class="search-box">
                 <button type="submit" class="search-btn-custom">
-                    <i class="fas fa-search"></i> Buscar productos
+                    <i class="fas fa-search"></i> Buscar
                 </button>
                 <input type="text" class="search-input" name="search" placeholder="Buscar productos o ingredientes..." value="{{ search|default:'' }}">
             </div>
@@ -137,7 +143,7 @@
             {% endif %}
         </li>
     {% empty %}
-        <li class="No-Found">No products found.</li>
+        <li class="No-Found">No se encontraron productos.</li>
     {% endfor %}
 
     <div >

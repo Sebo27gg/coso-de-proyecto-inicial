@@ -488,3 +488,28 @@ h2 {
         width: 100%;
     }
 }
+.home-link-button {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    gap: 6px; 
+}
+
+.home-link-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
