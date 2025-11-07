@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Allergy, Product
 from django.core.paginator import Paginator
 from django.db.models import Q
+from urllib.parse import urlparse
 
 # Create your views here.
 
@@ -120,11 +121,18 @@ def signout(request):
 
 #Product detail: Detalles de un producto en particular
 def product_detail(request, slug):
+    home_url = request.META.get('HTTP_REFERER')
+    if home_url:
+        parsed_url = urlparse(home_url)
+        home_query = '?' + parsed_url.query 
+    else:
+        home_query = ''
     product = get_object_or_404(Product, slug=slug)
     ingredient_list = product.ingredients.all()
     return render(request, 'product_detail.html',  {
         'product': product,
         'ingredients': ingredient_list,
+        'query': home_query
     })
 
 @login_required 
