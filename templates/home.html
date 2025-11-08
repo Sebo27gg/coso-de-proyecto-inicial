@@ -124,6 +124,17 @@
                        {% if view_filter == 'prohibidos' %}checked{% endif %}>
                 <label for="filter_prohibidos">🚫 Prohibidos</label>
             </div>
+            <div class="view-filters"> <input type="radio" id="scope_todos" name="search_scope" value="todos" 
+                       {% if search_scope == 'todos' or not search_scope %}checked{% endif %}>
+                <label for="scope_todos">Buscar en: Todos</label>
+                
+                <input type="radio" id="scope_productos" name="search_scope" value="productos" 
+                       {% if search_scope == 'productos' %}checked{% endif %}>
+                <label for="scope_productos">Solo Productos</label>
+                
+                <input type="radio" id="scope_ingredientes" name="search_scope" value="ingredientes" 
+                       {% if search_scope == 'ingredientes' %}checked{% endif %}>
+                <label for="scope_ingredientes">Solo Ingredientes</label>
 
             <!-- BUSCADOR CON BOTÓN A LA IZQUIERDA -->
             <div class="search-box">

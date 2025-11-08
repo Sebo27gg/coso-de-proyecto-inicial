@@ -16,53 +16,68 @@ def index(request):
     return render(request, 'index.html')
 
 #Home: Buscador de alimentos
-def home(request):  
+def home(request): 
     # Logica de interfaz de productos y paginacion
     search_query = request.GET.get('search')
     page_query = request.GET.get('page')
     view_filter = request.GET.get('view_filter', 'todos')
-    allergy_query = '&'.join([f'{id}={value}' for id, value in request.GET.items() if id not in ["search", "page","view filter"]]) + '&'
+    search_scope = request.GET.get('search_scope', 'todos') 
+    
+    allergy_query = '&'.join([f'{id}={value}' for id, value in request.GET.items() if id not in ["search", "page", "view_filter", "search_scope"]]) + '&'
 
     if not page_query:
         page_query = 1
 
+    #Filtro busqueda
     if search_query:
-        products_list = Product.objects.filter(
-            Q(name__icontains=search_query) |
-            Q(ingredients__name__icontains=search_query)
-        ).distinct()
+        if search_scope == 'productos':
+            # Solo buscar en el nombre del producto
+            products_list = Product.objects.filter(
+                Q(name__icontains=search_query)
+            ).distinct()
+        elif search_scope == 'ingredientes':
+            # Solo buscar en los ingredientes
+            products_list = Product.objects.filter(
+                Q(ingredients__name__icontains=search_query)
+            ).distinct()
+        else: # 'todos'
+            # Buscar en ambos (lógica original)
+            products_list = Product.objects.filter(
+                Q(name__icontains=search_query) |
+                Q(ingredients__name__icontains=search_query)
+            ).distinct()
     else:
         products_list = Product.objects.all()
-    products_page = Paginator(products_list, 18).get_page(page_query)
 
-    # Logica de detector de comidas peligrosas
     if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
         user_allergies = user.allergy_set.all()
     else:
         allergy_list = Allergy.objects.all()
         user_allergies = []
-        for data in allergy_query:
-            if data.isnumeric():
-                user_allergies.append(Allergy.objects.get(id=int(data)))
-
+        for key in request.GET:
+            if key.isnumeric():
+                try:
+                    user_allergies.append(Allergy.objects.get(id=int(key)))
+                except Allergy.DoesNotExist:
+                    pass
     banned_ingredients = set()
     for allergy in user_allergies:
         banned_ingredients.update(allergy.ingredients.all())
     
     banned_products = []
-    for product in products_page:
+    for product in products_list: 
         if set(product.ingredients.all()) & banned_ingredients:
             banned_products.append(product)
 
+   #Filtro de permitidos/prohibidos/todos
     if view_filter == 'permitidos':
         final_products_list = [p for p in products_list if p not in banned_products]
-    
     elif view_filter == 'prohibidos':
         final_products_list = [p for p in products_list if p in banned_products]
-    
     else:
         final_products_list = products_list
+
 
     products_page = Paginator(final_products_list, 18).get_page(page_query)
 
@@ -72,8 +87,10 @@ def home(request):
         "allergys_on": allergy_query,
         "products" : products_page,
         "banned" : banned_products,
-        "view_filter": view_filter, 
+        "view_filter": view_filter,
+        "search_scope": search_scope, # <-- NUEVO: Pasa el filtro a la plantilla
     })
+    
 #Signup: Creacion de cuenta
 def signup(request):
     if request.method == 'GET':
@@ -83,7 +100,7 @@ def signup(request):
         if form.is_valid():
                 user = form.save()
                 login(request, user)
-                return redirect("home")   
+                return redirect("home")
         else:
             return render(request, 'registration/signup.html', {
                 "form" : CustomUserCreationForm(),
@@ -106,7 +123,7 @@ def signin(request):
             login(request, user)
             return redirect("home")
 
-#Perfil: gestor de alergias, y demas configuraciones        
+#Perfil: gestor de alergias, y demas configuraciones        
 @login_required
 def perfil(request):
     allergy_list = Allergy.objects.all()
@@ -139,11 +156,11 @@ def product_detail(request, slug):
         home_query = ''
     product = get_object_or_404(Product, slug=slug)
     ingredient_list = product.ingredients.all()
-    return render(request, 'product_detail.html',  {
+    return render(request, 'product_detail.html',{
         'product': product,
         'ingredients': ingredient_list,
         'query': home_query
-    })
+    })    
 
 @login_required 
 def add_to_favorites(request, product_id):
@@ -152,12 +169,12 @@ def add_to_favorites(request, product_id):
     if request.method == 'POST':
         user = request.user
         
-        if product in user.favorite_products.all():
-            product.favorites.remove(user)
+        # Asumiendo que el related_name es 'favorite_products'
+        if user.favorite_products.filter(id=product_id).exists():
+            user.favorite_products.remove(product)
         else:
-            product.favorites.add(user)         
-    # Redirigimos al usuario a la página anterior
-    # 'home' es un fallback por si no se encuentra la página anterior
+            user.favorite_products.add(product)
+            
     return redirect(request.META.get('HTTP_REFERER', 'home'))
 
 @login_required 
