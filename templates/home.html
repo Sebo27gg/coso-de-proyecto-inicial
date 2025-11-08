@@ -76,7 +76,9 @@
 <div class="container">
     <div class="card">
         {% if not user.is_authenticated %}
-        
+            <a href="{% url 'signup' %}" class="boton-favoritos">
+            ¡Únete para agregar favoritos!
+            </a>
         <div class="guest-welcome">
             <h1>Bienvenido invitado</h1>
             <p>Selecciona tus alergias para personalizar tu experiencia</p>
