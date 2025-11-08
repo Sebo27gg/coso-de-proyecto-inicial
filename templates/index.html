@@ -8,23 +8,33 @@
 {% endblock styles %}
 
 {% block content %}
+    <div class="heading">
+        <div class="logo"> <p><img src="logo.png" Alt="Logo AllergEat"></p> </div>
+        <div class="inicios">
+            <a href="{% url 'home' %}" class="guest"> Entrar como invitado </a>
+            <a href="{% url 'login' %}" class="login"> Iniciar sesión </a>
+            <a href="{% url 'signup' %}" class="signup"> Registrate </a>  
+        </div>
+    </div>
+        
+    </div>
     <div class="grid">
         <div class="info">
         <h1> AllergEat </h1>
         <h2> ¿Qué es AllergEat? </h2>
         <p> AllergEat es una plataforma diseñada para facilitar la vida de las personas con alergias alimentarias. Nuestra misión es proporcionar información precisa y accesible sobre ingredientes y productos alimenticios, ayudando a los usuarios a tomar decisiones informadas y seguras al momento de elegir sus alimentos. </p>
         </div>
-        <div class="enter">
-            <p> Puedes </p>
-            <a href="{% url 'home' %}" class="guest"> Entrar como invitado </a>
-            <p> Para ingresar sin iniciar sesión
-                o bien puedes
-            </p>
-            <a href="{% url 'login' %}" class="login"> Iniciar sesión </a>
-            <p> para mantener tus alergias guardadas cada vez que entres a la plataforma</p>
-            <a href="{% url 'signup' %}" class="signup"> Registrate </a>
-            <p> si aún no tienes una cuenta</p>
-            
-        </div>      
+        <div class="image">
+            <img src="/static/images/logo-penca-pa-poner-algo.png" alt="Imagen AllergEat">
+        </div>
     </div>
+    <div class="enter">
+        <p> Puedes entrar como invitado o iniciar sesión/registrarte para una experiencia personalizada. </p>
+        <div class="buttons">
+        <a href="{% url 'home' %}" class="guest"> Entrar como invitado </a>
+        <a href="{% url 'login' %}" class="login"> Iniciar sesión </a>
+        <a href="{% url 'signup' %}" class="signup"> Registrate </a>  
+        </div>       
+    </div>       
+    
 {% endblock content %}

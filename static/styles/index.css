@@ -14,18 +14,30 @@ body {
     color: var(--dark-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.heading {
+    display:flex;
+    background-color: var(--light-color);
+    padding: 10px 20px;
+    padding-top: auto;
+    margin-bottom: auto;
+    border-radius: var(--border-radius);
+}
+.logo {
+    padding-top: auto;
+}
+.inicios {
+    margin-left: auto;
+}
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    grid-template-columns:  2fr 1fr;
+    margin-top: 20px;
+    grid-gap: 20px;
+    max-width: 100%;
+    padding-left: 1% ;
 }
 .info {
-    max-width: 800px;
-    margin-left: 0px;
+    max-width: auto;
     padding: 20px;
     background: white;
     border-radius: var(--border-radius);
@@ -49,59 +61,27 @@ body {
     line-height: 1.6;
 }
 .enter {
-    max-width: 250px;
-    margin-left: 120px;
-    background: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
-    text-align: center;
+    background-color: var(--light-color);
+    padding: 10px 20px;
 }
 .enter p{
     font-size: 20px;
     text-align: center;
-    padding-bottom: 15%;
+    padding-bottom: 15px;
 }
-.guest {
+.buttons {
+    text-align: center;
+}
+.guest, .login, .signup {
     display: inline-block;
+    margin: 10px;
+    margin-left: 10px;
     padding: 10px 20px;
-    background-color: var(--primary-color);
+    font-size: 18px;
     color: white;
+    background-color: var(--primary-color);
     border: none;
     border-radius: var(--border-radius);
-    cursor: pointer;
     text-decoration: none;
     transition: var(--transition);
-}
-.guest:hover {
-    background-color: var(--secondary-color);
-}
-.login {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    text-decoration: none;
-    transition: var(--transition);
-}
-.login:hover {
-    background-color: var(--secondary-color);
-}
-.signup {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    text-decoration: none;
-    transition: var(--transition);
-}
-.signup:hover {
-    background-color: var(--secondary-color);
 }
