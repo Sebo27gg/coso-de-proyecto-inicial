@@ -176,7 +176,7 @@
     <div >
         <span>
             {% if products.has_previous %} 
-                <a href="?{{ allergys_on }}search={{ search|default:'' }}&page={{ products.previous_page_number }}">Anterior</a>
+                <a href="?{{ query }}&page={{ products.previous_page_number }}">Anterior</a>
             {% endif %}
 
             <span>
@@ -184,7 +184,7 @@
             </span>
 
             {% if products.has_next %}
-                <a href="?{{ allergys_on }}search={{ search|default:'' }}&page={{ products.next_page_number }}">Siguiente</a>
+                <a href="?{{ query }}&page={{ products.next_page_number }}">Siguiente</a>
             {% endif %}
         </span>
     </div>

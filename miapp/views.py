@@ -19,14 +19,14 @@ def index(request):
 def home(request): 
     # Logica de interfaz de productos y paginacion
     search_query = request.GET.get('search')
-    page_query = request.GET.get('page')
+    page_num = request.GET.get('page')
     view_filter = request.GET.get('view_filter', 'todos')
     search_scope = request.GET.get('search_scope', 'todos') 
     
-    allergy_query = '&'.join([f'{id}={value}' for id, value in request.GET.items() if id not in ["search", "page", "view_filter", "search_scope"]]) + '&'
+    query = '&'.join([f'{param}={value}' for param, value in request.GET.items() if param != "page"])
 
-    if not page_query:
-        page_query = 1
+    if not page_num:
+        page_num = 1
 
     #Filtro busqueda
     if search_query:
@@ -61,6 +61,9 @@ def home(request):
                     user_allergies.append(Allergy.objects.get(id=int(key)))
                 except Allergy.DoesNotExist:
                     pass
+
+    # Logica de alimentos baneados
+
     banned_ingredients = set()
     for allergy in user_allergies:
         banned_ingredients.update(allergy.ingredients.all())
@@ -79,16 +82,16 @@ def home(request):
         final_products_list = products_list
 
 
-    products_page = Paginator(final_products_list, 18).get_page(page_query)
+    products_page = Paginator(final_products_list, 18).get_page(page_num)
 
     return render(request, 'home.html', {
         "allergies": user_allergies if request.user.is_authenticated else allergy_list,
         "search": search_query,
-        "allergys_on": allergy_query,
         "products" : products_page,
         "banned" : banned_products,
         "view_filter": view_filter,
         "search_scope": search_scope, # <-- NUEVO: Pasa el filtro a la plantilla
+        "query": query
     })
     
 #Signup: Creacion de cuenta
