@@ -111,6 +111,19 @@
                 </div>
             </div>
             {% endif %}
+            <div class="view-filters">
+                <input type="radio" id="filter_todos" name="view_filter" value="todos" 
+                       {% if view_filter == 'todos' or not view_filter %}checked{% endif %}>
+                <label for="filter_todos">Todos</label>
+                
+                <input type="radio" id="filter_permitidos" name="view_filter" value="permitidos" 
+                       {% if view_filter == 'permitidos' %}checked{% endif %}>
+                <label for="filter_permitidos">✅ Permitidos</label>
+                
+                <input type="radio" id="filter_prohibidos" name="view_filter" value="prohibidos" 
+                       {% if view_filter == 'prohibidos' %}checked{% endif %}>
+                <label for="filter_prohibidos">🚫 Prohibidos</label>
+            </div>
 
             <!-- BUSCADOR CON BOTÓN A LA IZQUIERDA -->
             <div class="search-box">
@@ -126,25 +139,28 @@
 
 
     <h2>Resultados</h2> 
- 
+    <ul class="product-grid">
     {% for product in products %}
     
         <li {% if product in banned %} class="item-warning" {% else %} class="item-product" {% endif %}>
             <a href="{% url 'product_detail' slug=product.slug %}">
                 <div class='image-container'>
-                    <img src="{{ product.photo.url }}" alt="{{ product.name }}">
+                    <img src="{{ product.photo.url }}"style="max-width: 400px; width: 100%; height: auto;" alt="{{ product.name }}">
                 </div>
                 <strong  class="shown-item">
                     {{ product.name }} 
                 </strong>
             </a>
             {% if product in banned %}
-                <p>NO PUEDES COMER ESTO</p>
+                <p class="banned-text">NO PUEDES COMER ESTO</p>
+            {% else %}
+                <p class="safe-text">PUEDES COMER ESTO</p>
             {% endif %}
         </li>
     {% empty %}
         <li class="No-Found">No se encontraron productos.</li>
     {% endfor %}
+    </ul>
 
     <div >
         <span>

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Allergy, Product
+from .models import Allergy, Product, Ingredient
 from django.core.paginator import Paginator
 from django.db.models import Q
 from urllib.parse import urlparse
@@ -13,8 +13,6 @@ from urllib.parse import urlparse
 
 # Index: pagina principal de informacion
 def index(request):
-    if request.user.is_authenticated:
-        return redirect("home")
     return render(request, 'index.html')
 
 #Home: Buscador de alimentos
@@ -22,7 +20,8 @@ def home(request):
     # Logica de interfaz de productos y paginacion
     search_query = request.GET.get('search')
     page_query = request.GET.get('page')
-    allergy_query = '&'.join([f'{id}={value}' for id, value in request.GET.items() if id not in ["search", "page"]]) + '&'
+    view_filter = request.GET.get('view_filter', 'todos')
+    allergy_query = '&'.join([f'{id}={value}' for id, value in request.GET.items() if id not in ["search", "page","view filter"]]) + '&'
 
     if not page_query:
         page_query = 1
@@ -34,7 +33,7 @@ def home(request):
         ).distinct()
     else:
         products_list = Product.objects.all()
-    products_page = Paginator(products_list, 4).get_page(page_query)
+    products_page = Paginator(products_list, 18).get_page(page_query)
 
     # Logica de detector de comidas peligrosas
     if request.user.is_authenticated:
@@ -56,14 +55,25 @@ def home(request):
         if set(product.ingredients.all()) & banned_ingredients:
             banned_products.append(product)
 
+    if view_filter == 'permitidos':
+        final_products_list = [p for p in products_list if p not in banned_products]
+    
+    elif view_filter == 'prohibidos':
+        final_products_list = [p for p in products_list if p in banned_products]
+    
+    else:
+        final_products_list = products_list
+
+    products_page = Paginator(final_products_list, 18).get_page(page_query)
+
     return render(request, 'home.html', {
         "allergies": user_allergies if request.user.is_authenticated else allergy_list,
         "search": search_query,
         "allergys_on": allergy_query,
         "products" : products_page,
         "banned" : banned_products,
-        })
-
+        "view_filter": view_filter, 
+    })
 #Signup: Creacion de cuenta
 def signup(request):
     if request.method == 'GET':
