@@ -186,3 +186,14 @@ def view_favorites(request):
     return render(request, 'favorites.html', {
         'favorites': favorites
     })
+
+from django.core.mail import send_mail
+def sendemail(request):
+    send_mail(
+    "Password reset test",
+    "This is a test email from Django",
+    "allergeat111@gmail.com",
+    ["aderesoadereso1@gmail.com"],
+    fail_silently=False,
+    )
+    return redirect("home")

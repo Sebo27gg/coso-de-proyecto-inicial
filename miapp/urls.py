@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', views.signin, name="login"),
     path('logout/', views.signout, name="logout"),
     path('home/settings/', views.perfil, name="perfil"),
+    path('sendemail/', views.sendemail, name="sendemail"),
     path('home/product-<str:slug>/', views.product_detail, name='product_detail'),
     path('home/favorites/', views.view_favorites, name='view_favorites'),
     path('home/favorites/add/<int:product_id>/', views.add_to_favorites, name='add_to_favorites'),
