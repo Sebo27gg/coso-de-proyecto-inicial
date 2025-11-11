@@ -1,0 +1,188 @@
+/* Estilos para la página de Favoritos */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Título principal */
+h2 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2.2rem;
+}
+
+/* Enlace volver a home */
+a[href="{% url 'home' %}"] {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #3498db;
+}
+
+a[href="{% url 'home' %}"]:hover {
+    background-color: white;
+    color: #3498db;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Línea separadora */
+hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    margin: 25px 0;
+    opacity: 0.7;
+}
+
+/* Grid de productos */
+.row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Tarjetas de productos */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: white;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen de la tarjeta */
+.card-img-top {
+    transition: transform 0.3s ease;
+    border-bottom: 1px solid #eee;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Cuerpo de la tarjeta */
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Botón de quitar favoritos */
+.btn-outline-danger {
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    background-color: transparent;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-outline-danger:hover {
+    background-color: #e74c3c;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Mensaje cuando no hay favoritos */
+.lead {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-top: 50px;
+    padding: 40px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 2px dashed #bdc3c7;
+}
+
+/* Efectos de animación para las tarjetas */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.col-md-4 {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .row {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .row {
+        grid-template-columns: 1fr;
+    }
+    
+    a[href="{% url 'home' %}"] {
+        display: block;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+
+/* Efecto de carga suave */
+.card {
+    animation: fadeIn 0.6s ease;
+}
+
+/* Mejora visual para el estado vacío */
+.container:has(.lead) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
