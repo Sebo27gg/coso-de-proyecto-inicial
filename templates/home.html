@@ -178,14 +178,14 @@
     {% endfor %}
     </ul>
 
-    <div >
+    <div class="pagination-simple" >
         <span>
             {% if products.has_previous %} 
                 <a href="?{{ query }}&page={{ products.previous_page_number }}">Anterior</a>
             {% endif %}
 
             <span>
-                Pagina {{ products.number }} de {{ products.paginator.num_pages }}
+                Página {{ products.number }} de {{ products.paginator.num_pages }}
             </span>
 
             {% if products.has_next %}

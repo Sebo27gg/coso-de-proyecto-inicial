@@ -629,3 +629,35 @@ h2 {
     background-color: var(--success-color);
     border-color: var(--success-color);
 }
+
+/* indicador de página :D */
+
+.pagination-simple {
+    text-align: center;
+    margin: 30px 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.pagination-simple a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.pagination-simple a:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+.pagination-simple span {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 10px;
+    color: #666;
+    font-weight: 500;
+}
