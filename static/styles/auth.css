@@ -1,0 +1,109 @@
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --background-color: #f5f7fb;
+    --focus-color: #a8d0ff;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    --transition: all 0.3s ease;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--dark-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container-signin {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 20px;
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(219, 241, 255, 0.752);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+.container-login {
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 7%;
+    padding: 30px;
+    background-color: rgba(219, 241, 255, 0.752);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+.container-email {
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 7%;
+    padding: 30px;
+    background-color: rgba(219, 241, 255, 0.752);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+.texto {
+    p {
+        text-align: center;
+        font-size: medium;
+        margin-top: auto;
+        gap: inherit;
+    }
+    
+}
+p {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+#id_username, #id_password, #id_email, #id_password1, #id_password2 {
+    flex: 1;
+    width: 90%;
+    padding: 14px;
+    border: 1px solid #3c6ccc5b;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: var(--transition);
+    position: center;
+}
+#id_username:focus, #id_password:focus, #id_email:focus, #id_password1:focus, #id_password2:focus {
+    border-color: var(--focus-color);
+    box-shadow: 0 0 5px var(--focus-color);
+    outline: none;
+}
+
+.ingresar-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 16px;
+    display: block;
+    margin: 16px auto 0 auto;
+}
+.ingresar-btn:hover {
+    background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow);
+    transform: scale(1.05);
+}
+.reset {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+}

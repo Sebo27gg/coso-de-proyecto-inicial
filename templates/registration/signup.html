@@ -1,7 +1,11 @@
 {% extends "registration/base_reg.html" %}
-
+{% load static %}
 
 {% block title %}Crear cuenta{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/auth.css' %}">
+{% endblock %}
 
 {% block content %}
 <h1>Crear cuenta</h1>
@@ -9,7 +13,26 @@
 {{msg}}
 <form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Crear</button>
+    <div class="container-signin">
+        <div class="register-requests">
+            <div class="texto">
+            <p> La contraseña debe contener al menos 8 caracteres.</p>
+            <p> No puede ser una contraseña comúnmente utilizada.</p>
+            <p> No puede ser completamente numérica.</p>
+            <p> Debe contener al menos una letra mayúscula, una minúscula y un número. </p>
+            </div>
+        </div>
+        <div class="form">
+        <p> Nombre de usuario:  </p>
+        {{ form.username }}
+        <p> Correo electrónico:  </p>
+        {{ form.email }}
+        <p> Contraseña: </p>
+        {{ form.password1 }}
+        <p> Confirmar Contraseña: </p>
+        {{ form.password2 }}
+        <button type="submit" class="ingresar-btn">Crear</button>
+        </div>
+    </div>
 </form>
 {% endblock content %}

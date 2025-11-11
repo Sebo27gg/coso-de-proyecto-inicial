@@ -28,6 +28,11 @@ body {
 .inicios {
     margin-left: auto;
 }
+.image img {
+    display: block;
+    max-width: 800px;
+    margin-top: 6%; /* baja la imagen un poco */
+}
 .grid {
     display: grid;
     grid-template-columns:  2fr 1fr;
@@ -76,7 +81,7 @@ body {
     display: inline-block;
     margin: 10px;
     margin-left: 10px;
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-size: 18px;
     color: white;
     background-color: var(--primary-color);
@@ -84,4 +89,9 @@ body {
     border-radius: var(--border-radius);
     text-decoration: none;
     transition: var(--transition);
+}
+.guest:hover, .login:hover, .signup:hover {
+    background-color: var(--secondary-color);
+    box-shadow: var(--box-shadow);
+    transform: scale(1.01);
 }

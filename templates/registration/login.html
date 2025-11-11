@@ -1,7 +1,11 @@
 {% extends "registration/base_reg.html" %}
-
+{% load static %}
 
 {% block title %}Ingresar{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/auth.css' %}">
+{% endblock %}
 
 {% block content %}
 <h1>Ingresar con tu cuenta</h1>
@@ -9,9 +13,14 @@
 {{msg}}
 <form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Ingresar</button>
+    <div class="container-login">
+    <p> Nombre de usuario:  </p>
+    {{ form.username }}
+    <p> Contraseña: </p>
+    {{ form.password }}
+    <button type="submit" class="ingresar-btn">Ingresar</button>
+    </div>
 </form>
 <br>
-<a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a>
+<a href="{% url 'password_reset' %}" class="reset">¿Olvidaste tu contraseña?</a>
 {% endblock content %}
