@@ -29,12 +29,30 @@
         </div>
     </div>
     <div class="enter">
-        <p> Puedes entrar como invitado o iniciar sesión/registrarte para una experiencia personalizada. </p>
+        <div class="image b">
+            <img src="/static/images/imagen-index.png" alt="Imagen Seguro" class="image b">
+        </div>
+        <div text-enter>
+        <p> 
+            Si eres una persona con alergias alimentarias, AllergEat es la herramienta perfecta para ti.
+            Prueba AllergEat como invitado para hacer una visita rápida: podrás buscar productos, ver ingredientes y marcar 
+            elementos, pero estas marcas serán temporales. Si sólo quieres evaluar la plataforma o realizar una búsqueda 
+            puntual, esta es la forma más fácil.
+        </p>
+        <p>
+            Sin embargo, para una experiencia completa y personalizada, te recomendamos registrarte. Al crear una cuenta, 
+            podrás guardar tus alergias, gestionar tus productos favoritos y acceder a todas las funcionalidades que AllergEat tiene para ofrecerte.
+        </p>
+        </div>     
+    </div>  
+    <div class="container-buttons">
         <div class="buttons">
-        <a href="{% url 'home' %}" class="guest"> Entrar como invitado </a>
-        <a href="{% url 'login' %}" class="login"> Iniciar sesión </a>
-        <a href="{% url 'signup' %}" class="signup"> Registrate </a>  
-        </div>       
-    </div>       
-    
+            <p>
+                Puedes entrar como invitado o iniciar sesión/registrarte para una experiencia personalizada.
+            </p>
+            <a href="{% url 'home' %}" class="guest"> Entrar como invitado </a>
+            <a href="{% url 'login' %}" class="login"> Iniciar sesión </a>
+            <a href="{% url 'signup' %}" class="signup"> Registrate </a>  
+        </div>
+    </div>      
 {% endblock content %}
