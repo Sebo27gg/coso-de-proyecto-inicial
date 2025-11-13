@@ -1,6 +1,7 @@
 :root {
     --primary-color: #4361ee;
     --secondary-color: #3f37c9;
+    --accent-color: #4cc9f0;
     --background-color: #f5f7fb;
     --focus-color: #a8d0ff;
     --light-color: #f8f9fa;
@@ -55,18 +56,22 @@ h3 {
 }
 .texto {
     p {
-        text-align: center;
+        text-align: justify;
         font-size: medium;
-        margin-top: auto;
+        font-weight: 300;
+        margin-top: 50;
+        margin-bottom: 20;
         gap: inherit;
     }
-    
 }
 p {
     text-align: center;
     font-size: 18px;
+    font-weight: 500;
     margin-bottom: 8px;
+    margin-left: 5%;
 }
+
 
 #id_username, #id_password, #id_email, #id_password1, #id_password2 {
     flex: 1;
@@ -77,6 +82,10 @@ p {
     font-size: 16px;
     transition: var(--transition);
     position: center;
+    margin-bottom: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 #id_username:focus, #id_password:focus, #id_email:focus, #id_password1:focus, #id_password2:focus {
     border-color: var(--focus-color);
@@ -122,4 +131,33 @@ p {
     border-radius: var(--border-radius);
     text-decoration: none;
     transition: var(--transition);
+}
+
+/* Botón específico para la página de registro */
+
+.register-home-button {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    gap: 6px; 
+    box-sizing: var(--box-shadow);
+}
+
+.register-home-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
 }

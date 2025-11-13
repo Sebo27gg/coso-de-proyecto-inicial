@@ -8,8 +8,15 @@
 {% endblock %}
 
 {% block content %}
-<h1>Crear cuenta</h1>
+<!-- Botón de inicio -->
+<class="register-home-button">
+    <a href="{% url 'index' %}" class="register-home-button">
+        <i class="fas fa-home"></i> Página de inicio
+    </a>
 
+
+<!-- Bloque de creacion de cuenta -->
+<h1>Crear cuenta</h1>
 {{msg}}
 <form action="" method="post">
     {% csrf_token %}
@@ -32,6 +39,7 @@
         <p> Confirmar Contraseña: </p>
         {{ form.password2 }}
         <button type="submit" class="ingresar-btn">Crear</button>
+
         </div>
     </div>
 </form>
