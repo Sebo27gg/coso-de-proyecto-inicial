@@ -14,19 +14,36 @@ body {
     color: var(--dark-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .heading {
-    display:flex;
+    display: flex;
     background-color: var(--light-color);
     padding: 10px 20px;
-    padding-top: auto;
-    margin-bottom: auto;
     border-radius: var(--border-radius);
+    align-items: center;
+    height: fit-content;
 }
+
+
+.heading > div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+.heading > div:first-child p {
+    margin: 0;
+}
+
 .logo {
-    padding-top: auto;
+    max-width: 100px;
+    height: auto;
+    display: block;
 }
+
 .inicios {
     margin-left: auto;
+    display: flex;
+    gap: 10px;
 }
 .image img {
     display: block;
